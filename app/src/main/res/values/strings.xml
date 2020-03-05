@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Clothes Search App</string>
+    <string name="search">Wyszukaj</string>
+    <string name="favourites">Ulubione</string>
+    <string name="filters">Moje filtry</string>
+    <string name="color_spinner_title">Kolor:</string>
+    <string name="size_spinner_title">Rozmiar:</string>
+    <string name="price_title">Cena:</string>
+    <string name="submit_filter_button">Szukaj</string>
+    <string name="sorting_title">Sortuj:</string>
+    <string name="ascending_sort">Rosnąco</string>
+    <string name="descending_sort">Malejąco</string>
+    <string name="type">Typ</string>
+    <string name="search_occassion">Szukaj promocji</string>
+    <string name="clothes_title">nazwa ubrania</string>
+    <string name="clothes_type">typ ubrania</string>
+    <string name="clothes_price">cena ubrania</string>
+    <string name="see_more">Szczegóły</string>
+    <string name="delete">Usuń element</string>
+    <string name="clothes_link">link</string>
+</resources>
