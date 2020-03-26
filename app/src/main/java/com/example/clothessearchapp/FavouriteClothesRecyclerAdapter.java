@@ -11,13 +11,16 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.clothessearchapp.structure.Clothes;
+import com.example.clothessearchapp.structure.OldClothes;
+
 import java.util.List;
 
 public class FavouriteClothesRecyclerAdapter extends RecyclerView.Adapter<FavouriteClothesRecyclerAdapter.ViewHolder> {
 
-    private List<Clothes> favouriteClothes;
+    private List<OldClothes> favouriteClothes;
 
-    FavouriteClothesRecyclerAdapter(List<Clothes> favouriteClothes) {
+    FavouriteClothesRecyclerAdapter(List<OldClothes> favouriteClothes) {
         this.favouriteClothes = favouriteClothes;
     }
 
@@ -51,7 +54,7 @@ public class FavouriteClothesRecyclerAdapter extends RecyclerView.Adapter<Favour
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Clothes chosenClothes = favouriteClothes.get(position);
+        OldClothes chosenClothes = favouriteClothes.get(position);
         holder.nameText.setText(chosenClothes.getName());
         holder.typeText.setText(chosenClothes.getType());
         holder.priceText.setText(chosenClothes.getPrice().toString());

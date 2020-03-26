@@ -1,11 +1,11 @@
-package com.example.clothessearchapp;
+package com.example.clothessearchapp.structure;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.Objects;
 
-public class Clothes implements Parcelable {
+public class OldClothes implements Parcelable {
 
     private Integer id;
     private String type;
@@ -15,7 +15,7 @@ public class Clothes implements Parcelable {
     private String name;
     private Boolean favourite;
 
-    Clothes(Integer id, String type, String color, String size, Integer price, String name, Boolean favourite) {
+    public OldClothes(Integer id, String type, String color, String size, Integer price, String name, Boolean favourite) {
         this.id = id;
         this.type = type;
         this.color = color;
@@ -26,43 +26,43 @@ public class Clothes implements Parcelable {
     }
 
 
-    Integer getId() {
+    public Integer getId() {
         return id;
     }
 
 
-    Boolean isFavourite() {
+    public Boolean isFavourite() {
         return favourite;
     }
 
-    void setFavourite(Boolean favourite) {
+    public void setFavourite(Boolean favourite) {
         this.favourite = favourite;
     }
 
 
-    String getName(){
+    public String getName(){
         return name;
     }
 
-    String getType() {
+    public String getType() {
         return type;
     }
 
-    String getColor() {
+    public String getColor() {
         return color;
     }
 
-    String getSize() {
+    public String getSize() {
         return size;
     }
 
-    Integer getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
     @Override
     public String toString() {
-        return "Clothes{" +
+        return "OldClothes{" +
                 "id='" + id + '\'' +
                 "type='" + type + '\'' +
                 ", color='" + color + '\'' +
@@ -75,7 +75,7 @@ public class Clothes implements Parcelable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Clothes clothes = (Clothes) o;
+        OldClothes clothes = (OldClothes) o;
         return Objects.equals(type, clothes.type) &&
                 Objects.equals(color, clothes.color) &&
                 Objects.equals(size, clothes.size) &&
@@ -104,7 +104,7 @@ public class Clothes implements Parcelable {
         dest.writeValue(this.favourite);
     }
 
-    protected Clothes(Parcel in) {
+    protected OldClothes(Parcel in) {
         this.id = (Integer) in.readValue(Integer.class.getClassLoader());
         this.type = in.readString();
         this.color = in.readString();
@@ -114,15 +114,15 @@ public class Clothes implements Parcelable {
         this.favourite = (Boolean) in.readValue(Boolean.class.getClassLoader());
     }
 
-    public static final Parcelable.Creator<Clothes> CREATOR = new Parcelable.Creator<Clothes>() {
+    public static final Parcelable.Creator<OldClothes> CREATOR = new Parcelable.Creator<OldClothes>() {
         @Override
-        public Clothes createFromParcel(Parcel source) {
-            return new Clothes(source);
+        public OldClothes createFromParcel(Parcel source) {
+            return new OldClothes(source);
         }
 
         @Override
-        public Clothes[] newArray(int size) {
-            return new Clothes[size];
+        public OldClothes[] newArray(int size) {
+            return new OldClothes[size];
         }
     };
 }

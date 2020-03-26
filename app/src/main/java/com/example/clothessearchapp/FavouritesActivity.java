@@ -8,22 +8,25 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.clothessearchapp.structure.Clothes;
+import com.example.clothessearchapp.structure.OldClothes;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class FavouritesActivity extends AppCompatActivity {
 
-    private List<Clothes> clothes = new ArrayList<>(Arrays.asList(
-            new Clothes(1, "T-Shirt", "Czerwony", "M", 50, "Wzorzysta bluzka", false),
-            new Clothes(2, "Kurtka", "Niebieski", "S", 30, "Jesienna kurtka", true),
-            new Clothes(3,"Spodnie", "Czarny", "L", 75, "Spodnie chino", false),
-            new Clothes(4,"T-Shirt", "Różowy", "XL", 100, "Różowy T-Shirt", true),
-            new Clothes(5,"T-Shirt", "Pomarańczowy", "XL", 125, "T-Shirt w plamy", false),
-            new Clothes(6,"T-Shirt", "Czarny", "XL", 20, "T-Shirt w kropki", false),
-            new Clothes(7,"T-Shirt", "Czerwony", "XL", 40, "T-Shirt w paski", false),
-            new Clothes(8,"T-Shirt", "Różowy", "M", 45, "Różowy T-Shirt", false),
-            new Clothes(9,"T-Shirt", "Różowy", "L", 45, "Różowy T-Shirt", false)
+    private List<OldClothes> clothes = new ArrayList<>(Arrays.asList(
+            new OldClothes(1, "T-Shirt", "Czerwony", "M", 50, "Wzorzysta bluzka", false),
+            new OldClothes(2, "Kurtka", "Niebieski", "S", 30, "Jesienna kurtka", true),
+            new OldClothes(3,"Spodnie", "Czarny", "L", 75, "Spodnie chino", false),
+            new OldClothes(4,"T-Shirt", "Różowy", "XL", 100, "Różowy T-Shirt", true),
+            new OldClothes(5,"T-Shirt", "Pomarańczowy", "XL", 125, "T-Shirt w plamy", false),
+            new OldClothes(6,"T-Shirt", "Czarny", "XL", 20, "T-Shirt w kropki", false),
+            new OldClothes(7,"T-Shirt", "Czerwony", "XL", 40, "T-Shirt w paski", false),
+            new OldClothes(8,"T-Shirt", "Różowy", "M", 45, "Różowy T-Shirt", false),
+            new OldClothes(9,"T-Shirt", "Różowy", "L", 45, "Różowy T-Shirt", false)
     ));
     private FavouriteClothesRecyclerAdapter adapter;
 
@@ -40,7 +43,7 @@ public class FavouritesActivity extends AppCompatActivity {
 
     public void showDetail(View view){
         Intent intent = new Intent(this, ClothesDetailActivity.class);
-        Clothes chosenClothes = clothes.stream().filter(c -> c.getId() == view.getId()).findFirst().orElse(null);
+        OldClothes chosenClothes = clothes.stream().filter(c -> c.getId() == view.getId()).findFirst().orElse(null);
         if(chosenClothes != null){
             intent.putExtra("chosenClothes", chosenClothes);
             startActivity(intent);
@@ -48,7 +51,7 @@ public class FavouritesActivity extends AppCompatActivity {
     }
 
     public void deleteClothes(View view){
-        Clothes clothesToRemove = clothes.stream().filter(c -> c.getId() == view.getId()).findFirst().orElse(null);
+        OldClothes clothesToRemove = clothes.stream().filter(c -> c.getId() == view.getId()).findFirst().orElse(null);
         if(clothesToRemove != null){
             clothes.remove(clothesToRemove);
             adapter.notifyDataSetChanged();

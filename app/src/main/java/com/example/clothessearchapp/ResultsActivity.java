@@ -10,10 +10,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.inputmethod.EditorInfo;
-import android.widget.ImageView;
-import android.widget.Toast;
+
+import com.example.clothessearchapp.structure.Clothes;
+import com.example.clothessearchapp.structure.OldClothes;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -40,8 +40,8 @@ public class ResultsActivity extends AppCompatActivity {
             this.sortingType = sortingType;
         }
 
-        List<Clothes> getFilteredClothes(List<Clothes> clothes) {
-            List<Clothes> filteredClothes = clothes;
+        List<OldClothes> getFilteredClothes(List<OldClothes> clothes) {
+            List<OldClothes> filteredClothes = clothes;
 
             if (!color.equals("")) {
                 filteredClothes = filteredClothes.stream().filter(c -> c.getColor().equals(color)).collect(Collectors.toList());
@@ -55,25 +55,25 @@ public class ResultsActivity extends AppCompatActivity {
 
             switch (sortingType){
                 case ASCENDING:
-                    filteredClothes.sort(Comparator.comparing(Clothes::getPrice));
+                    filteredClothes.sort(Comparator.comparing(OldClothes::getPrice));
                 case DESCENDING:
-                    filteredClothes.sort(Comparator.comparing(Clothes::getPrice).reversed());
+                    filteredClothes.sort(Comparator.comparing(OldClothes::getPrice).reversed());
             }
 
             return filteredClothes;
         }
     }
 
-    private List<Clothes> clothes = new ArrayList<>(Arrays.asList(
-            new Clothes(1, "T-Shirt", "Czerwony", "M", 50, "Wzorzysta bluzka", false),
-            new Clothes(2,"Kurtka", "Niebieski", "S", 30, "Jesienna kurtka", true),
-            new Clothes(3,"Spodnie", "Czarny", "L", 75, "Spodnie chino", false),
-            new Clothes(4,"T-Shirt", "Różowy", "XL", 100, "Różowy T-Shirt", true),
-            new Clothes(5,"T-Shirt", "Pomarańczowy", "XL", 125, "T-Shirt w plamy", false),
-            new Clothes(6,"T-Shirt", "Czarny", "XL", 20, "T-Shirt w kropki", false),
-            new Clothes(7,"T-Shirt", "Czerwony", "XL", 40, "T-Shirt w paski", false),
-            new Clothes(8,"T-Shirt", "Różowy", "M", 45, "Różowy T-Shirt", false),
-            new Clothes(9,"T-Shirt", "Różowy", "L", 45, "Różowy T-Shirt", false)
+    private List<OldClothes> clothes = new ArrayList<>(Arrays.asList(
+            new OldClothes(1, "T-Shirt", "Czerwony", "M", 50, "Wzorzysta bluzka", false),
+            new OldClothes(2,"Kurtka", "Niebieski", "S", 30, "Jesienna kurtka", true),
+            new OldClothes(3,"Spodnie", "Czarny", "L", 75, "Spodnie chino", false),
+            new OldClothes(4,"T-Shirt", "Różowy", "XL", 100, "Różowy T-Shirt", true),
+            new OldClothes(5,"T-Shirt", "Pomarańczowy", "XL", 125, "T-Shirt w plamy", false),
+            new OldClothes(6,"T-Shirt", "Czarny", "XL", 20, "T-Shirt w kropki", false),
+            new OldClothes(7,"T-Shirt", "Czerwony", "XL", 40, "T-Shirt w paski", false),
+            new OldClothes(8,"T-Shirt", "Różowy", "M", 45, "Różowy T-Shirt", false),
+            new OldClothes(9,"T-Shirt", "Różowy", "L", 45, "Różowy T-Shirt", false)
     ));
 
     private ClothesRecyclerAdapter adapter;
@@ -91,7 +91,7 @@ public class ResultsActivity extends AppCompatActivity {
 //        Toast.makeText(this, lowerPrice + Integer.toString(higherPrice) + color + size, Toast.LENGTH_LONG).show();
 
         ClothesFilter clothesFilter = new ClothesFilter(color, size, lowerPrice, higherPrice, sortingType);
-        List<Clothes> filteredClothes = clothesFilter.getFilteredClothes(clothes);
+        List<OldClothes> filteredClothes = clothesFilter.getFilteredClothes(clothes);
 
         adapter = new ClothesRecyclerAdapter(filteredClothes);
         RecyclerView recycler = findViewById(R.id.clothes_recycler_view);

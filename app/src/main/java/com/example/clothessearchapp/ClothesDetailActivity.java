@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-
+import com.example.clothessearchapp.structure.OldClothes;
 
 public class ClothesDetailActivity extends AppCompatActivity {
 
@@ -24,14 +24,14 @@ public class ClothesDetailActivity extends AppCompatActivity {
 
         Bundle data = getIntent().getExtras();
         if(data != null){
-            Clothes clothes = data.getParcelable("chosenClothes");
+            OldClothes clothes = data.getParcelable("chosenClothes");
             setDisplayContent(clothes);
         }
 
 
     }
 
-    private void setDisplayContent(Clothes clothes) {
+    private void setDisplayContent(OldClothes clothes) {
         clothesName.setText(clothes.getName());
         clothesType.setText(clothes.getType());
         clothesPrice.setText(clothes.getPrice().toString());

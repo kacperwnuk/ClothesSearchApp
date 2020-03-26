@@ -13,15 +13,17 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.clothessearchapp.structure.OldClothes;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class ClothesRecyclerAdapter extends RecyclerView.Adapter<ClothesRecyclerAdapter.MyViewHolder> implements Filterable {
 
-    private List<Clothes> clothes;
-    private List<Clothes> allClothes;
+    private List<OldClothes> clothes;
+    private List<OldClothes> allClothes;
 
-    ClothesRecyclerAdapter(List<Clothes> clothes) {
+    ClothesRecyclerAdapter(List<OldClothes> clothes) {
         this.clothes = clothes;
         this.allClothes = new ArrayList<>(clothes);
     }
@@ -34,14 +36,14 @@ public class ClothesRecyclerAdapter extends RecyclerView.Adapter<ClothesRecycler
     private Filter filter = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
-            List<Clothes> filteredList = new ArrayList<>();
+            List<OldClothes> filteredList = new ArrayList<>();
 
             if (constraint == null || constraint.length() == 0){
                 filteredList.addAll(allClothes);
             } else {
                 String filterPattern = constraint.toString().toLowerCase().trim();
 
-                for (Clothes clothes: allClothes){
+                for (OldClothes clothes: allClothes){
                     if (clothes.getName().toLowerCase().contains(filterPattern)){
                         filteredList.add(clothes);
                     }
@@ -88,7 +90,7 @@ public class ClothesRecyclerAdapter extends RecyclerView.Adapter<ClothesRecycler
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
-        Clothes chosenClothes = clothes.get(position);
+        OldClothes chosenClothes = clothes.get(position);
         holder.clothesName.setText(chosenClothes.getName());
         holder.clothesType.setText(chosenClothes.getType());
 
