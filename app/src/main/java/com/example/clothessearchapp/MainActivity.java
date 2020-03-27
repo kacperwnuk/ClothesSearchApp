@@ -27,24 +27,25 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
-        Call<DetailedClothes> call = service.getDetailedClothes("0578630014", "H&M" );
-        call.enqueue(new Callback<DetailedClothes>() {
-            @Override
-            public void onResponse(Call<DetailedClothes> call, Response<DetailedClothes> response) {
-                System.out.println(response.body().getKey());
-            }
-
-            @Override
-            public void onFailure(Call<DetailedClothes> call, Throwable t) {
-                System.out.println(t.getMessage());
-            }
-        });
+// Request example
+//        GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
+////        Call<List<Clothes>> call = service.getClothes("T-SHIRT", "","","","","");
+////        call.enqueue(new Callback<List<Clothes>>() {
+////            @Override
+////            public void onResponse(Call<List<Clothes>> call, Response<List<Clothes>> response) {
+////                System.out.println(response.body());
+////            }
+////
+////            @Override
+////            public void onFailure(Call<List<Clothes>> call, Throwable t) {
+////                System.out.println(t.getMessage());
+////            }
+////        });
     }
 
 
     public void changeToSearchView(View view){
-        Intent intent = new Intent(this, FiltersActivity.class);
+        Intent intent = new Intent(this, ChooseTypeActivity.class);
         startActivity(intent);
     }
 

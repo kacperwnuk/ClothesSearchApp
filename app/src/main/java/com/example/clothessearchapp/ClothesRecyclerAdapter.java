@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.clothessearchapp.structure.Clothes;
 import com.example.clothessearchapp.structure.OldClothes;
 
 import java.util.ArrayList;
@@ -20,10 +21,10 @@ import java.util.List;
 
 public class ClothesRecyclerAdapter extends RecyclerView.Adapter<ClothesRecyclerAdapter.MyViewHolder> implements Filterable {
 
-    private List<OldClothes> clothes;
-    private List<OldClothes> allClothes;
+    private List<Clothes> clothes;
+    private List<Clothes> allClothes;
 
-    ClothesRecyclerAdapter(List<OldClothes> clothes) {
+    ClothesRecyclerAdapter(List<Clothes> clothes) {
         this.clothes = clothes;
         this.allClothes = new ArrayList<>(clothes);
     }
@@ -36,14 +37,14 @@ public class ClothesRecyclerAdapter extends RecyclerView.Adapter<ClothesRecycler
     private Filter filter = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
-            List<OldClothes> filteredList = new ArrayList<>();
+            List<Clothes> filteredList = new ArrayList<>();
 
             if (constraint == null || constraint.length() == 0){
                 filteredList.addAll(allClothes);
             } else {
                 String filterPattern = constraint.toString().toLowerCase().trim();
 
-                for (OldClothes clothes: allClothes){
+                for (Clothes clothes: allClothes){
                     if (clothes.getName().toLowerCase().contains(filterPattern)){
                         filteredList.add(clothes);
                     }
@@ -90,27 +91,27 @@ public class ClothesRecyclerAdapter extends RecyclerView.Adapter<ClothesRecycler
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
-        OldClothes chosenClothes = clothes.get(position);
+        Clothes chosenClothes = clothes.get(position);
         holder.clothesName.setText(chosenClothes.getName());
         holder.clothesType.setText(chosenClothes.getType());
 
-        if (chosenClothes.isFavourite()){
-            holder.favouriteStar.setImageResource(android.R.drawable.btn_star_big_on);
-        } else {
-            holder.favouriteStar.setImageResource(android.R.drawable.btn_star_big_off);
-        }
-
-        holder.favouriteStar.setOnClickListener(v -> {
-            Toast.makeText(v.getContext(), chosenClothes.getName(), Toast.LENGTH_SHORT).show();
-
-            if(chosenClothes.isFavourite()){
-                holder.favouriteStar.setImageResource(android.R.drawable.btn_star_big_off);
-                chosenClothes.setFavourite(false);
-            } else {
-                holder.favouriteStar.setImageResource(android.R.drawable.btn_star_big_on);
-                chosenClothes.setFavourite(true);
-            }
-        });
+//        if (chosenClothes.isFavourite()){
+//            holder.favouriteStar.setImageResource(android.R.drawable.btn_star_big_on);
+//        } else {
+//            holder.favouriteStar.setImageResource(android.R.drawable.btn_star_big_off);
+//        }
+//
+//        holder.favouriteStar.setOnClickListener(v -> {
+//            Toast.makeText(v.getContext(), chosenClothes.getName(), Toast.LENGTH_SHORT).show();
+//
+//            if(chosenClothes.isFavourite()){
+//                holder.favouriteStar.setImageResource(android.R.drawable.btn_star_big_off);
+//                chosenClothes.setFavourite(false);
+//            } else {
+//                holder.favouriteStar.setImageResource(android.R.drawable.btn_star_big_on);
+//                chosenClothes.setFavourite(true);
+//            }
+//        });
         holder.constraintLayout.setElevation(40.0f);
 //        holder.constraintLayout.setOnClickListener(view -> Toast.makeText(view.getContext(), clothes.get(position).getName(), Toast.LENGTH_LONG).show());
 
