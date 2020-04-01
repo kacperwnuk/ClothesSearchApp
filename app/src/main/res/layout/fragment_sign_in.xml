@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:contentDescription="For more ui/ux visit www.materialuiux.com"
+    tools:context=".fragments.SignInFragment"
+    tools:ignore="HardcodedText">
+
+    <!-- email and Password -->
+
+    <LinearLayout
+        android:id="@+id/id_SignIn_linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="64dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginRight="64dp"
+        android:contentDescription="For more ui/ux visit www.materialuiux.com"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/errorText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:textColor="#F08F021F" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="5dp"
+            android:background="@color/background_color"
+            android:contentDescription="For more ui/ux visit www.materialuiux.com">
+
+            <com.example.clothessearchapp.materialux.cairoEditText
+                android:id="@+id/id_Login_editText"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@null"
+                android:contentDescription="For more ui/ux visit www.materialuiux.com"
+                android:drawableLeft="@drawable/ic_profile"
+                android:drawablePadding="10dp"
+                android:gravity="left|center"
+                android:hint="@string/username"
+                android:inputType="text"
+                android:paddingLeft="4dp"
+                android:textColor="@color/secoundarytextcolor"
+                tools:ignore="ContentDescription,RtlHardcoded,RtlSymmetry" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:background="@color/background_color"
+            android:contentDescription="For more ui/ux visit www.materialuiux.com">
+
+            <com.example.clothessearchapp.materialux.cairoEditText
+                android:id="@+id/id_Password_editTextsd"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@null"
+                android:contentDescription="For more ui/ux visit www.materialuiux.com"
+                android:drawableStart="@drawable/ic_passwrd"
+                android:drawableLeft="@drawable/ic_passwrd"
+                android:drawablePadding="10dp"
+                android:gravity="left|center"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:paddingStart="4dp"
+                android:paddingLeft="4dp"
+                android:textColor="@color/secoundarytextcolor"
+                tools:ignore="ContentDescription" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- forget password -->
+
+<!--    <com.example.clothessearchapp.materialux.cairoTextView-->
+<!--        android:id="@+id/id_forgotPassword_textView"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@+id/id_SignIn_linearLayout"-->
+<!--        android:layout_marginStart="68dp"-->
+<!--        android:layout_marginLeft="68dp"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:contentDescription="For more ui/ux visit www.materialuiux.com"-->
+<!--        android:text="@string/forgot_password"-->
+<!--        android:textColor="@color/thirdtextcolor"-->
+<!--        android:textSize="18sp" />-->
+
+    <!-- Sign In Button -->
+
+    <com.example.clothessearchapp.materialux.cairoButton
+        android:id="@+id/id_Signin_Button"
+        android:layout_width="match_parent"
+        android:layout_height="39dp"
+        android:layout_below="@+id/id_SignIn_linearLayout"
+        android:layout_marginLeft="64dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginRight="64dp"
+        android:layout_marginBottom="24dp"
+        android:background="@color/button_color"
+        android:contentDescription="For more ui/ux visit www.materialuiux.com"
+        android:text="@string/sign_in"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
+
+
+
+</RelativeLayout>

@@ -3,8 +3,10 @@ package com.example.clothessearchapp.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.clothessearchapp.R;
 
@@ -14,7 +16,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+//
+//        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("Data", 0);
+//        String token = sharedPreferences.getString("Token", "");
+//        Toast.makeText(getApplicationContext(), token, Toast.LENGTH_SHORT).show();
 // Request example
 //        GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
 ////        Call<List<Clothes>> call = service.getClothes("T-SHIRT", "","","","","");
@@ -43,12 +48,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void changeToFiltersView(View view){
-        Intent intent = new Intent(this, SearchTypeActivity.class);
+        Intent intent = new Intent(this, SignInActivity.class);
         startActivity(intent);
     }
 
     public void changeToSearchOccasionsView(View view){
         Intent intent = new Intent(this, SearchOccasionsActivity.class);
+        startActivity(intent);
+    }
+
+    public void logOut(View view){
+        SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.data), 0);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove(getString(R.string.token));
+        editor.apply();
+
+        Intent intent = new Intent(this, SignInActivity.class);
         startActivity(intent);
     }
 }

@@ -13,8 +13,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activities.ChooseTypeActivity"
-            android:parentActivityName=".activities.MainActivity"/>
+        <activity android:name=".activities.SignInActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.ChooseTypeActivity"
+            android:parentActivityName=".activities.MainActivity" />
         <activity
             android:name=".activities.ClothesDetailActivity"
             android:parentActivityName=".activities.FavouritesActivity" />
@@ -33,13 +41,8 @@
         <activity
             android:name=".activities.SearchTypeActivity"
             android:parentActivityName=".activities.MainActivity" />
-        <activity android:name=".activities.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".activities.MainActivity"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
 
         <meta-data
             android:name="preloaded_fonts"

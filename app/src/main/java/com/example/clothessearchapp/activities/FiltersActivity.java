@@ -19,6 +19,7 @@ import com.example.clothessearchapp.network.RetrofitClientInstance;
 import com.example.clothessearchapp.structure.Color;
 import com.example.clothessearchapp.structure.Size;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -61,15 +62,16 @@ public class FiltersActivity extends AppCompatActivity implements AdapterView.On
 
     }
 
-    private void loadDataFromServer(){
+    private void loadDataFromServer() {
         GetDataService service = RetrofitClientInstance.getRetrofitInstance(false).create(GetDataService.class);
 
         Call<List<Color>> call = service.getColors(this.typeName);
+
         call.enqueue(new Callback<List<Color>>() {
             @Override
             public void onResponse(Call<List<Color>> call, Response<List<Color>> response) {
                 colors = response.body();
-
+                getSizes();
             }
 
             @Override
@@ -77,6 +79,13 @@ public class FiltersActivity extends AppCompatActivity implements AdapterView.On
                 System.out.println(t.getMessage());
             }
         });
+
+
+
+    }
+
+    private void getSizes() {
+        GetDataService service = RetrofitClientInstance.getRetrofitInstance(false).create(GetDataService.class);
 
         Call<List<Size>> call2 = service.getSizes();
         call2.enqueue(new Callback<List<Size>>() {
