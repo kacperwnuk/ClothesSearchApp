@@ -1,25 +1,36 @@
-package com.example.clothessearchapp;
+package com.example.clothessearchapp.adapters;
 
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.clothessearchapp.R;
 import com.example.clothessearchapp.structure.Type;
+
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.HashMap;
 import java.util.List;
 
 
 public class TypesRecyclerAdapter extends RecyclerView.Adapter<TypesRecyclerAdapter.MyViewHolder> {
 
     private List<Type> types;
+    private HashMap<String, Integer> bgImages = new HashMap<String, Integer>(){{
+        put("T-SHIRT", R.drawable.tshirt);
+        put("SHIRT", R.drawable.shirt);
+        put("PANTS", R.drawable.pants);
+        put("JACKET", R.drawable.jacket);
+        put("SWEATER", R.drawable.sweater);
+        put("SHORTS", R.drawable.shorts);
 
-    TypesRecyclerAdapter(List<Type> types) {
+    }};
+
+    public TypesRecyclerAdapter(List<Type> types) {
         this.types = types;
     }
 
@@ -49,9 +60,10 @@ public class TypesRecyclerAdapter extends RecyclerView.Adapter<TypesRecyclerAdap
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.clothesType.setText(types.get(position).getName());
+        String typeName = types.get(position).getName();
+        holder.clothesType.setText(typeName);
         holder.constraintLayout.setElevation(40.0f);
-
+        holder.backgroundImage.setImageResource(bgImages.getOrDefault(typeName, R.drawable.tshirt));
     }
 
 

@@ -1,24 +1,19 @@
-package com.example.clothessearchapp;
+package com.example.clothessearchapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.ListView;
 //import android.widget.SearchView;
-import android.widget.Toast;
+
+import com.example.clothessearchapp.R;
+import com.example.clothessearchapp.adapters.MyRecyclerAdapter;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,4 +1,4 @@
-package com.example.clothessearchapp;
+package com.example.clothessearchapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,19 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.clothessearchapp.network.GetDataService;
-import com.example.clothessearchapp.network.RetrofitClientInstance;
-import com.example.clothessearchapp.structure.Clothes;
-import com.example.clothessearchapp.structure.Color;
-import com.example.clothessearchapp.structure.DetailedClothes;
-import com.example.clothessearchapp.structure.Size;
-import com.example.clothessearchapp.structure.Type;
-
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import com.example.clothessearchapp.R;
 
 public class MainActivity extends AppCompatActivity {
 

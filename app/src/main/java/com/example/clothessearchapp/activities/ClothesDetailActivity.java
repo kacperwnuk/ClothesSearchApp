@@ -1,10 +1,11 @@
-package com.example.clothessearchapp;
+package com.example.clothessearchapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.example.clothessearchapp.R;
 import com.example.clothessearchapp.structure.OldClothes;
 
 public class ClothesDetailActivity extends AppCompatActivity {

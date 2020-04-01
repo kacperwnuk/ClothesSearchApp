@@ -1,4 +1,4 @@
-package com.example.clothessearchapp;
+package com.example.clothessearchapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -8,7 +8,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.clothessearchapp.structure.Clothes;
+import com.example.clothessearchapp.R;
+import com.example.clothessearchapp.adapters.FavouriteClothesRecyclerAdapter;
 import com.example.clothessearchapp.structure.OldClothes;
 
 import java.util.ArrayList;

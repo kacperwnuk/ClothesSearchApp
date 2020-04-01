@@ -1,4 +1,4 @@
-package com.example.clothessearchapp;
+package com.example.clothessearchapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
@@ -12,19 +12,15 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.inputmethod.EditorInfo;
-import android.widget.ProgressBar;
 
+import com.example.clothessearchapp.R;
+import com.example.clothessearchapp.SortingType;
+import com.example.clothessearchapp.adapters.ClothesRecyclerAdapter;
 import com.example.clothessearchapp.network.GetDataService;
 import com.example.clothessearchapp.network.RetrofitClientInstance;
 import com.example.clothessearchapp.structure.Clothes;
-import com.example.clothessearchapp.structure.Color;
-import com.example.clothessearchapp.structure.OldClothes;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import retrofit2.Call;
 import retrofit2.Callback;

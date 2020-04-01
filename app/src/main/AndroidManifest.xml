@@ -13,27 +13,27 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ChooseTypeActivity"
-            android:parentActivityName=".MainActivity"/>
+        <activity android:name=".activities.ChooseTypeActivity"
+            android:parentActivityName=".activities.MainActivity"/>
         <activity
-            android:name=".ClothesDetailActivity"
-            android:parentActivityName=".FavouritesActivity" />
+            android:name=".activities.ClothesDetailActivity"
+            android:parentActivityName=".activities.FavouritesActivity" />
         <activity
-            android:name=".SearchOccasionsActivity"
-            android:parentActivityName=".MainActivity" />
+            android:name=".activities.SearchOccasionsActivity"
+            android:parentActivityName=".activities.MainActivity" />
         <activity
-            android:name=".ResultsActivity"
-            android:parentActivityName=".ChooseTypeActivity" />
+            android:name=".activities.ResultsActivity"
+            android:parentActivityName=".activities.ChooseTypeActivity" />
         <activity
-            android:name=".FiltersActivity"
-            android:parentActivityName=".ChooseTypeActivity" />
+            android:name=".activities.FiltersActivity"
+            android:parentActivityName=".activities.ChooseTypeActivity" />
         <activity
-            android:name=".FavouritesActivity"
-            android:parentActivityName=".MainActivity" />
+            android:name=".activities.FavouritesActivity"
+            android:parentActivityName=".activities.MainActivity" />
         <activity
-            android:name=".SearchTypeActivity"
-            android:parentActivityName=".MainActivity" />
-        <activity android:name=".MainActivity">
+            android:name=".activities.SearchTypeActivity"
+            android:parentActivityName=".activities.MainActivity" />
+        <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

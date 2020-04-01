@@ -1,4 +1,4 @@
-package com.example.clothessearchapp;
+package com.example.clothessearchapp.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,14 +7,13 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.clothessearchapp.R;
 import com.example.clothessearchapp.structure.Clothes;
-import com.example.clothessearchapp.structure.OldClothes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +23,7 @@ public class ClothesRecyclerAdapter extends RecyclerView.Adapter<ClothesRecycler
     private List<Clothes> clothes;
     private List<Clothes> allClothes;
 
-    ClothesRecyclerAdapter(List<Clothes> clothes) {
+    public ClothesRecyclerAdapter(List<Clothes> clothes) {
         this.clothes = clothes;
         this.allClothes = new ArrayList<>(clothes);
     }

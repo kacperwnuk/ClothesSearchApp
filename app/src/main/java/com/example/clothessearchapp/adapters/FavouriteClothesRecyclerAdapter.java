@@ -1,4 +1,4 @@
-package com.example.clothessearchapp;
+package com.example.clothessearchapp.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.clothessearchapp.structure.Clothes;
+import com.example.clothessearchapp.R;
 import com.example.clothessearchapp.structure.OldClothes;
 
 import java.util.List;
@@ -20,7 +20,7 @@ public class FavouriteClothesRecyclerAdapter extends RecyclerView.Adapter<Favour
 
     private List<OldClothes> favouriteClothes;
 
-    FavouriteClothesRecyclerAdapter(List<OldClothes> favouriteClothes) {
+    public FavouriteClothesRecyclerAdapter(List<OldClothes> favouriteClothes) {
         this.favouriteClothes = favouriteClothes;
     }
 
