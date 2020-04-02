@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.clothessearchapp">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".activities.SignInActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.ChooseTypeActivity"
+            android:parentActivityName=".activities.MainActivity" />
+        <activity
+            android:name=".activities.ClothesDetailActivity"
+            android:parentActivityName=".activities.FavouritesActivity" />
+        <activity
+            android:name=".activities.SearchOccasionsActivity"
+            android:parentActivityName=".activities.MainActivity" />
+        <activity
+            android:name=".activities.ClothesGeneralListingActivity"
+            android:parentActivityName=".activities.ChooseTypeActivity" />
+        <activity
+            android:name=".activities.FiltersActivity"
+            android:parentActivityName=".activities.ChooseTypeActivity" />
+        <activity
+            android:name=".activities.FavouritesActivity"
+            android:parentActivityName=".activities.MainActivity" />
+        <activity
+            android:name=".activities.SearchTypeActivity"
+            android:parentActivityName=".activities.MainActivity" />
+        <activity android:name=".activities.MainActivity"/>
+
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+    </application>
+
+</manifest>

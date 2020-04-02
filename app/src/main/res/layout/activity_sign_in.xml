@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:contentDescription="For more ui/ux visit www.materialuiux.com"
+tools:context=".activities.SignInActivity"
+tools:ignore="HardcodedText">
+
+    <RelativeLayout
+        android:id="@+id/id_header_RelativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:contentDescription="For more ui/ux visit www.materialuiux.com">
+
+        <!-- header Image -->
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="149dp"
+            android:layout_alignParentTop="true"
+            android:contentDescription="For more ui/ux visit www.materialuiux.com"
+            android:scaleType="fitXY"
+            android:src="@drawable/header" />
+
+        <!-- logo  -->
+
+        <!--    <ImageView-->
+        <!--        android:layout_width="match_parent"-->
+        <!--        android:layout_height="wrap_content"-->
+        <!--        android:layout_centerInParent="true"-->
+        <!--        android:layout_marginLeft="128dp"-->
+        <!--        android:layout_marginRight="128dp"-->
+        <!--        android:contentDescription="For more ui/ux visit www.materialuiux.com"-->
+        <!--        android:src="@drawable/logo" />-->
+
+    </RelativeLayout>
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_above="@+id/id_footer_imageView"
+    android:layout_below="@+id/id_header_RelativeLayout"
+    android:contentDescription="For more ui/ux visit www.materialuiux.com"
+    android:orientation="vertical">
+
+    <!-- Tabs for switching between fragment inside ViewPager -->
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tablayout"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:contentDescription="For more ui/ux visit www.materialuiux.com"
+        app:tabBackground="@drawable/tab_color_selector"
+        app:tabGravity="fill"
+        app:tabIndicator="@null"
+        app:tabMaxWidth="0dp"
+        app:tabMode="fixed"
+        app:tabTextColor="@color/primarytextcolor" />
+
+    <!-- ViewPager -->
+
+    <com.example.clothessearchapp.materialux.ViewPagerNoSwipe
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="For more ui/ux visit www.materialuiux.com" />
+
+</LinearLayout>
+
+<!-- footer Image -->
+
+    <ImageView
+        android:id="@+id/id_footer_imageView"
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:layout_alignParentBottom="true"
+        android:contentDescription="For more ui/ux visit www.materialuiux.com"
+        android:scaleType="fitXY"
+        android:src="@drawable/footer" />
+</RelativeLayout>
