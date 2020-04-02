@@ -22,9 +22,12 @@ public class Clothes {
     private List<String> colors;
     @SerializedName("sizes")
     private List<String> sizes;
-    private Boolean favourite;
+    @SerializedName("shop")
+    private String shop;
 
-    public Clothes(String key, String type, String name, String price, String imageLink, List<String> colors, List<String> sizes, Boolean favourite) {
+    private Boolean favourite = false;
+
+    public Clothes(String key, String type, String name, String price, String imageLink, List<String> colors, List<String> sizes, String shop) {
         this.key = key;
         this.type = type;
         this.name = name;
@@ -32,8 +35,10 @@ public class Clothes {
         this.imageLink = imageLink;
         this.colors = colors;
         this.sizes = sizes;
-        this.favourite = favourite;
+        this.shop = shop;
     }
+
+    public String getShop() { return shop;}
 
     public String getKey() {
         return key;
@@ -91,7 +96,7 @@ public class Clothes {
         this.sizes = sizes;
     }
 
-    public Boolean getFavourite() {
+    public Boolean isFavourite() {
         return favourite;
     }
 
@@ -117,6 +122,23 @@ public class Clothes {
     @Override
     public int hashCode() {
         return Objects.hash(key, type, name, price, imageLink, colors, sizes, favourite);
+    }
+
+
+    public String sizesRepresentation(){
+        StringBuilder result = new StringBuilder();
+        for(String size : sizes){
+            result.append(String.format("%s \n", size));
+        }
+        return result.toString();
+    }
+
+    public String colorsRepresentation(){
+        StringBuilder result = new StringBuilder();
+        for(String color : colors){
+            result.append(String.format("%s \n", color));
+        }
+        return result.toString();
     }
 
 //    @Override

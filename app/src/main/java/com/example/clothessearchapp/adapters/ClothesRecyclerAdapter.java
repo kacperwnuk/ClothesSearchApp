@@ -14,14 +14,22 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.clothessearchapp.R;
 import com.example.clothessearchapp.structure.Clothes;
+import com.example.clothessearchapp.structure.DetailClothesRequest;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class ClothesRecyclerAdapter extends RecyclerView.Adapter<ClothesRecyclerAdapter.MyViewHolder> implements Filterable {
 
     private List<Clothes> clothes;
     private List<Clothes> allClothes;
+
+    private HashMap<String, Integer> logos = new HashMap<String, Integer>(){{
+        put("HM", R.drawable.hm_logo);
+        put("House", R.drawable.house_logo);
+        put("Reserved", R.drawable.reserved_logo);
+    }};
 
     public ClothesRecyclerAdapter(List<Clothes> clothes) {
         this.clothes = clothes;
@@ -65,18 +73,18 @@ public class ClothesRecyclerAdapter extends RecyclerView.Adapter<ClothesRecycler
     class MyViewHolder extends RecyclerView.ViewHolder {
 
         ConstraintLayout constraintLayout;
-        ImageView favouriteStar;
+        ImageView logo;
         TextView clothesName;
-        TextView clothesType;
+        TextView clothesPrice;
 //        TextView testViewTitle;
 
         MyViewHolder(View view) {
             super(view);
 //            this.testViewTitle = view.findViewById(R.id.title);
             this.constraintLayout = (ConstraintLayout) view;
-            this.favouriteStar = view.findViewById(R.id.favourite_star);
-            this.clothesName = view.findViewById(R.id.clothes_name);
-            this.clothesType = view.findViewById(R.id.type);
+            this.logo = view.findViewById(R.id.logo);
+            this.clothesName = view.findViewById(R.id.product_name);
+            this.clothesPrice = view.findViewById(R.id.clothes_price);
         }
     }
 
@@ -84,7 +92,7 @@ public class ClothesRecyclerAdapter extends RecyclerView.Adapter<ClothesRecycler
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.clothes_card_view_item, parent, false);
+        View view = inflater.inflate(R.layout.general_clothes_card_view_item, parent, false);
         return new MyViewHolder(view);
     }
 
@@ -92,8 +100,10 @@ public class ClothesRecyclerAdapter extends RecyclerView.Adapter<ClothesRecycler
     public void onBindViewHolder(@NonNull MyViewHolder holder, final int position) {
         Clothes chosenClothes = clothes.get(position);
         holder.clothesName.setText(chosenClothes.getName());
-        holder.clothesType.setText(chosenClothes.getType());
-
+        holder.clothesPrice.setText(chosenClothes.getPrice());
+        holder.logo.setImageResource(logos.getOrDefault(chosenClothes.getShop(), R.drawable.hm_logo));
+        DetailClothesRequest detailClothesRequest = new DetailClothesRequest(chosenClothes.getShop(), chosenClothes.getKey());
+        holder.constraintLayout.setTag(detailClothesRequest);
 //        if (chosenClothes.isFavourite()){
 //            holder.favouriteStar.setImageResource(android.R.drawable.btn_star_big_on);
 //        } else {

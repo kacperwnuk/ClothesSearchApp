@@ -50,4 +50,6 @@
     <string name="data">Data</string>
     <string name="token">Token</string>
     <string name="logout">Logout</string>
+    <string name="product_name">Nazwa produktu</string>
+    <string name="text">tekst</string>
 </resources>

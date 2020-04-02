@@ -30,7 +30,7 @@
             android:name=".activities.SearchOccasionsActivity"
             android:parentActivityName=".activities.MainActivity" />
         <activity
-            android:name=".activities.ResultsActivity"
+            android:name=".activities.ClothesGeneralListingActivity"
             android:parentActivityName=".activities.ChooseTypeActivity" />
         <activity
             android:name=".activities.FiltersActivity"

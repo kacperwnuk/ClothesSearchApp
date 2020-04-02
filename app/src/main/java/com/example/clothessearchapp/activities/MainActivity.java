@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
     public void logOut(View view){
         SharedPreferences sharedPreferences = getSharedPreferences(getString(R.string.data), 0);
         SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove(getString(R.string.username));
         editor.remove(getString(R.string.token));
         editor.apply();
 

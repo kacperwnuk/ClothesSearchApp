@@ -19,7 +19,6 @@ import com.example.clothessearchapp.network.RetrofitClientInstance;
 import com.example.clothessearchapp.structure.Color;
 import com.example.clothessearchapp.structure.Size;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -170,7 +169,7 @@ public class FiltersActivity extends AppCompatActivity implements AdapterView.On
     public void submitForm(View view) {
 //        String text = lowerPrice.getText() + " " + higherPrice.getText() + " " + colourDropdown.getSelectedItem().toString() + " " + sizeDropdown.getSelectedItem().toString();
 //        Toast.makeText(view.getContext(), text, Toast.LENGTH_LONG).show();
-        Intent intent = new Intent(this, ResultsActivity.class);
+        Intent intent = new Intent(this, ClothesGeneralListingActivity.class);
         intent.putExtra("lowerPrice", lowerPrice.getText().toString());
 //        if (lowerPrice.getText().toString().equals("")){
 //            intent.putExtra("lowerPrice", 0);

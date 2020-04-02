@@ -11,8 +11,8 @@ public class DetailedClothes extends Clothes {
     @SerializedName("composition")
     private String composition;
 
-    public DetailedClothes(String key, String type, String name, String price, String imageLink, List<String> colors, List<String> sizes, Boolean favourite, String description, String composition) {
-        super(key, type, name, price, imageLink, colors, sizes, favourite);
+    public DetailedClothes(String key, String type, String name, String price, String imageLink, List<String> colors, List<String> sizes, String shop, String description, String composition) {
+        super(key, type, name, price, imageLink, colors, sizes, shop);
         this.description = description;
         this.composition = composition;
     }

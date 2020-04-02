@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.inputmethod.EditorInfo;
 
 import com.example.clothessearchapp.R;
@@ -19,6 +20,7 @@ import com.example.clothessearchapp.adapters.ClothesRecyclerAdapter;
 import com.example.clothessearchapp.network.GetDataService;
 import com.example.clothessearchapp.network.RetrofitClientInstance;
 import com.example.clothessearchapp.structure.Clothes;
+import com.example.clothessearchapp.structure.DetailClothesRequest;
 
 import java.util.List;
 
@@ -26,7 +28,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ResultsActivity extends AppCompatActivity {
+public class ClothesGeneralListingActivity extends AppCompatActivity {
 
 
     private List<Clothes> clothes;
@@ -84,24 +86,12 @@ public class ResultsActivity extends AppCompatActivity {
 //            return filteredClothes;
 //        }
     }
-//
-//    private List<OldClothes> clothes = new ArrayList<>(Arrays.asList(
-//            new OldClothes(1, "T-Shirt", "Czerwony", "M", 50, "Wzorzysta bluzka", false),
-//            new OldClothes(2,"Kurtka", "Niebieski", "S", 30, "Jesienna kurtka", true),
-//            new OldClothes(3,"Spodnie", "Czarny", "L", 75, "Spodnie chino", false),
-//            new OldClothes(4,"T-Shirt", "Różowy", "XL", 100, "Różowy T-Shirt", true),
-//            new OldClothes(5,"T-Shirt", "Pomarańczowy", "XL", 125, "T-Shirt w plamy", false),
-//            new OldClothes(6,"T-Shirt", "Czarny", "XL", 20, "T-Shirt w kropki", false),
-//            new OldClothes(7,"T-Shirt", "Czerwony", "XL", 40, "T-Shirt w paski", false),
-//            new OldClothes(8,"T-Shirt", "Różowy", "M", 45, "Różowy T-Shirt", false),
-//            new OldClothes(9,"T-Shirt", "Różowy", "L", 45, "Różowy T-Shirt", false)
-//    ));
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_results);
+        setContentView(R.layout.activity_clothes_general_listing);
         Intent intent = getIntent();
         ClothesFilter clothesFilter = new ClothesFilter(intent);
 
@@ -117,6 +107,14 @@ public class ResultsActivity extends AppCompatActivity {
 
     }
 
+    public void showDetail(View view){
+        Intent intent = new Intent(this, ClothesDetailActivity.class);
+        DetailClothesRequest detailClothesRequest = (DetailClothesRequest) view.getTag();
+        intent.putExtra("request", detailClothesRequest);
+        System.out.println(view.getTag());
+        startActivity(intent);
+    }
+
     private void getFilteredClothes(ClothesFilter clothesFilter) {
         GetDataService service = RetrofitClientInstance.getRetrofitInstance(false).create(GetDataService.class);
 
@@ -130,7 +128,7 @@ public class ResultsActivity extends AppCompatActivity {
                 adapter = new ClothesRecyclerAdapter(clothes);
                 RecyclerView recycler = findViewById(R.id.clothes_recycler_view);
                 recycler.setAdapter(adapter);
-                recycler.setLayoutManager(new GridLayoutManager(ResultsActivity.this, 2));
+                recycler.setLayoutManager(new GridLayoutManager(ClothesGeneralListingActivity.this, 1));
             }
 
             @Override

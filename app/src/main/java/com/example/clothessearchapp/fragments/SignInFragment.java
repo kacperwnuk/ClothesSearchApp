@@ -150,7 +150,7 @@ public class SignInFragment extends Fragment implements View.OnClickListener {
                 progressDialog.dismiss();
                 String token = response.body();
                 if (token != null) {
-                    saveToken(token);
+                    saveData(token, login);
                     goToMenu();
                     System.out.println(token);
                 } else {
@@ -172,10 +172,12 @@ public class SignInFragment extends Fragment implements View.OnClickListener {
         startActivity(intent);
     }
 
-    private void saveToken(String token) {
+    private void saveData(String token, String username) {
         SharedPreferences sharedPreferences = getActivity().getApplicationContext().getSharedPreferences(getString(R.string.data), 0);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(getString(R.string.token), token);
+        editor.putString(getString(R.string.username), username);
         editor.apply();
     }
+
 }
