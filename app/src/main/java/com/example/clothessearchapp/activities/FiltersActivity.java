@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -64,13 +65,17 @@ public class FiltersActivity extends AppCompatActivity implements AdapterView.On
     private void loadDataFromServer() {
         GetDataService service = RetrofitClientInstance.getRetrofitInstance(false).create(GetDataService.class);
 
-        Call<List<Color>> call = service.getColors(this.typeName);
+        SharedPreferences sharedPreferences = getSharedPreferences("Data", 0);
+        String token = sharedPreferences.getString(getString(R.string.token), "");
+
+
+        Call<List<Color>> call = service.getColors("Token " + token, this.typeName);
 
         call.enqueue(new Callback<List<Color>>() {
             @Override
             public void onResponse(Call<List<Color>> call, Response<List<Color>> response) {
                 colors = response.body();
-                getSizes();
+                getSizes(token);
             }
 
             @Override
@@ -80,13 +85,12 @@ public class FiltersActivity extends AppCompatActivity implements AdapterView.On
         });
 
 
-
     }
 
-    private void getSizes() {
+    private void getSizes(String token) {
         GetDataService service = RetrofitClientInstance.getRetrofitInstance(false).create(GetDataService.class);
 
-        Call<List<Size>> call2 = service.getSizes();
+        Call<List<Size>> call2 = service.getSizes("Token " + token);
         call2.enqueue(new Callback<List<Size>>() {
             @Override
             public void onResponse(Call<List<Size>> call, Response<List<Size>> response) {
@@ -187,9 +191,9 @@ public class FiltersActivity extends AppCompatActivity implements AdapterView.On
         intent.putExtra("type", typeName);
 
         String sortKey = "sortingType";
-        if (ascendingCheckbox.isChecked()){
+        if (ascendingCheckbox.isChecked()) {
             intent.putExtra(sortKey, SortingType.ASCENDING.name());
-        } else if (descendingCheckbox.isChecked()){
+        } else if (descendingCheckbox.isChecked()) {
             intent.putExtra(sortKey, SortingType.DESCENDING.name());
         } else {
             intent.putExtra(sortKey, SortingType.NONE.name());

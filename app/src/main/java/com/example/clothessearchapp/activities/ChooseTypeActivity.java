@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -45,8 +46,12 @@ public class ChooseTypeActivity extends AppCompatActivity {
 
 
     private void showTypes(){
+
+        SharedPreferences sharedPreferences = getSharedPreferences("Data", 0);
+        String token = sharedPreferences.getString(getString(R.string.token), "");
+
         GetDataService service = RetrofitClientInstance.getRetrofitInstance(false).create(GetDataService.class);
-        Call<List<Type>> call = service.getTypes();
+        Call<List<Type>> call = service.getTypes("Token " + token);
         call.enqueue(new Callback<List<Type>>() {
             @Override
             public void onResponse(Call<List<Type>> call, Response<List<Type>> response) {

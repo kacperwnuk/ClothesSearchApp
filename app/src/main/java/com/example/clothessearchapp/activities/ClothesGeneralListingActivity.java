@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -118,14 +119,18 @@ public class ClothesGeneralListingActivity extends AppCompatActivity {
     private void getFilteredClothes(ClothesFilter clothesFilter) {
         GetDataService service = RetrofitClientInstance.getRetrofitInstance(false).create(GetDataService.class);
 
-        Call<List<Clothes>> call = service.getClothes(clothesFilter.type, clothesFilter.color, clothesFilter.size, clothesFilter.lowerPrice, clothesFilter.higherPrice, clothesFilter.sortingType.name().toLowerCase());
+        SharedPreferences sharedPreferences = getSharedPreferences("Data", 0);
+        String token = sharedPreferences.getString(getString(R.string.token), "");
+
+
+        Call<List<Clothes>> call = service.getClothes("Token " + token, clothesFilter.type, clothesFilter.color, clothesFilter.size, clothesFilter.lowerPrice, clothesFilter.higherPrice, clothesFilter.sortingType.name().toLowerCase());
         call.enqueue(new Callback<List<Clothes>>() {
             @Override
             public void onResponse(Call<List<Clothes>> call, Response<List<Clothes>> response) {
                 progressDialog.dismiss();
                 clothes = response.body();
 
-                adapter = new ClothesRecyclerAdapter(clothes);
+                adapter = new ClothesRecyclerAdapter(clothes, R.layout.general_clothes_card_view_item);
                 RecyclerView recycler = findViewById(R.id.clothes_recycler_view);
                 recycler.setAdapter(adapter);
                 recycler.setLayoutManager(new GridLayoutManager(ClothesGeneralListingActivity.this, 1));
