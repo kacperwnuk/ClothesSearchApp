@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -20,6 +21,7 @@ import com.example.clothessearchapp.network.RetrofitClientInstance;
 import com.example.clothessearchapp.structure.Color;
 import com.example.clothessearchapp.structure.Size;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,8 +33,14 @@ public class FiltersActivity extends AppCompatActivity implements AdapterView.On
 
     private String typeName;
 
-    private List<Color> colors;
-    private List<Size> sizes;
+//    private List<Color> colors;
+//    private List<Size> sizes;
+
+    private List<String> colors;
+    private List<String> sizes;
+
+    private ArrayAdapter<String> colorAdapter;
+    private ArrayAdapter<String> sizeAdapter;
 
     private boolean colourChecked = false;
     private boolean sizeChecked = false;
@@ -43,7 +51,7 @@ public class FiltersActivity extends AppCompatActivity implements AdapterView.On
     private TextView higherPrice;
     private CheckBox ascendingCheckbox;
     private CheckBox descendingCheckbox;
-
+    private Button submit;
     private ProgressDialog progressDialog;
 
 
@@ -52,13 +60,33 @@ public class FiltersActivity extends AppCompatActivity implements AdapterView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filters);
         typeName = getIntent().getStringExtra("clothesType");
+        colors = new ArrayList<>();
+        sizes = new ArrayList<>();
 
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Loading...");
-        progressDialog.show();
+        submit = findViewById(R.id.submit_filter);
+        submit.setEnabled(false);
+
+        lowerPrice = findViewById(R.id.lower_price);
+        higherPrice = findViewById(R.id.higher_price);
+
+        ascendingCheckbox = findViewById(R.id.ascending_cb);
+        descendingCheckbox = findViewById(R.id.descending_cb);
+
+        ascendingCheckbox.setOnClickListener(v -> {
+            if (ascendingCheckbox.isChecked()) {
+                descendingCheckbox.setChecked(false);
+            }
+        });
+
+        descendingCheckbox.setOnClickListener(v -> {
+            if (descendingCheckbox.isChecked()) {
+                ascendingCheckbox.setChecked(false);
+            }
+        });
+
+        initializeDropdowns();
 
         loadDataFromServer();
-
 
     }
 
@@ -74,8 +102,11 @@ public class FiltersActivity extends AppCompatActivity implements AdapterView.On
         call.enqueue(new Callback<List<Color>>() {
             @Override
             public void onResponse(Call<List<Color>> call, Response<List<Color>> response) {
-                colors = response.body();
-                getSizes(token);
+                List<Color> cls = response.body();
+                colors.clear();
+                colors.addAll(cls.stream().map(Color::getName).collect(Collectors.toList()));
+                colorAdapter.notifyDataSetChanged();
+                enableButton();
             }
 
             @Override
@@ -84,46 +115,29 @@ public class FiltersActivity extends AppCompatActivity implements AdapterView.On
             }
         });
 
-
-    }
-
-    private void getSizes(String token) {
-        GetDataService service = RetrofitClientInstance.getRetrofitInstance(false).create(GetDataService.class);
-
         Call<List<Size>> call2 = service.getSizes("Token " + token);
         call2.enqueue(new Callback<List<Size>>() {
             @Override
             public void onResponse(Call<List<Size>> call, Response<List<Size>> response) {
-                progressDialog.dismiss();
-                sizes = response.body();
-
-                lowerPrice = findViewById(R.id.lower_price);
-                higherPrice = findViewById(R.id.higher_price);
-
-                ascendingCheckbox = findViewById(R.id.ascending_cb);
-                descendingCheckbox = findViewById(R.id.descending_cb);
-
-                ascendingCheckbox.setOnClickListener(v -> {
-                    if (ascendingCheckbox.isChecked()) {
-                        descendingCheckbox.setChecked(false);
-                    }
-                });
-
-                descendingCheckbox.setOnClickListener(v -> {
-                    if (descendingCheckbox.isChecked()) {
-                        ascendingCheckbox.setChecked(false);
-                    }
-                });
-
-                initializeDropdowns();
+                List<Size> sizeList = response.body();
+                sizes.clear();
+                sizes.addAll(sizeList.stream().map(Size::getName).collect(Collectors.toList()));
+                sizeAdapter.notifyDataSetChanged();
+                enableButton();
             }
 
             @Override
             public void onFailure(Call<List<Size>> call, Throwable t) {
-                progressDialog.dismiss();
                 System.out.println(t.getMessage());
             }
         });
+
+    }
+
+    private void enableButton() {
+        if(colors.size() != 0 && sizes.size() != 0){
+            submit.setEnabled(true);
+        }
     }
 
 
@@ -133,12 +147,10 @@ public class FiltersActivity extends AppCompatActivity implements AdapterView.On
         sizeDropdown = findViewById(R.id.size_spinner);
         sizeDropdown.setOnItemSelectedListener(this);
 
-        List<String> color_names = colors.stream().map(Color::getName).collect(Collectors.toList());
-        List<String> size_names = sizes.stream().map(Size::getName).collect(Collectors.toList());
-        ArrayAdapter<String> colourAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, color_names);
-        ArrayAdapter<String> sizeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, size_names);
+        colorAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, colors);
+        sizeAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, sizes);
 
-        colourDropdown.setAdapter(colourAdapter);
+        colourDropdown.setAdapter(colorAdapter);
         colourDropdown.setSelection(0);
         sizeDropdown.setAdapter(sizeAdapter);
         sizeDropdown.setSelection(0);

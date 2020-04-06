@@ -3,6 +3,7 @@ package com.example.clothessearchapp.network;
 import com.example.clothessearchapp.structure.Clothes;
 import com.example.clothessearchapp.structure.Color;
 import com.example.clothessearchapp.structure.DetailedClothes;
+import com.example.clothessearchapp.structure.Occasion;
 import com.example.clothessearchapp.structure.Size;
 import com.example.clothessearchapp.structure.Type;
 import com.example.clothessearchapp.structure.UserCredentials;
@@ -54,5 +55,16 @@ public interface GetDataService {
     @FormUrlEncoded
     @HTTP(method = "DELETE", path = "/favourites", hasBody = true)
     Call<Clothes> deleteFavourite(@Header("Authorization") String auth, @Field("key") String key);
+
+    @GET("/occasions")
+    Call<List<Occasion>>  getOccasions(@Header("Authorization") String auth);
+
+    @FormUrlEncoded
+    @POST("/occasions")
+    Call<Occasion> addOccasion(@Header("Authorization") String auth, @Field("key") String key, @Field("type") String type, @Field("color") String color, @Field("size") String size, @Field("price") String price);
+
+    @FormUrlEncoded
+    @HTTP(method = "DELETE", path = "/occasions", hasBody = true)
+    Call<Occasion> deleteOccasion(@Header("Authorization") String auth, @Field("key") String key);
 
 }
