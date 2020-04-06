@@ -13,7 +13,7 @@
     <string name="type">Typ</string>
     <string name="search_occassion">Szukaj promocji</string>
     <string name="clothes_title">nazwa ubrania</string>
-    <string name="clothes_type">typ ubrania</string>
+    <string name="clothes_type">Typ ubrania</string>
     <string name="clothes_price">cena ubrania</string>
     <string name="see_more">Szczegóły</string>
     <string name="delete">Usuń element</string>
@@ -52,4 +52,8 @@
     <string name="logout">Logout</string>
     <string name="product_name">Nazwa produktu</string>
     <string name="text">tekst</string>
+    <string name="send_email">Wyślij na maila</string>
+    <string name="delete_all">Usuń wszystkie</string>
+    <string name="add_scheduler">Rozpocznij poszukiwanie</string>
+    <string name="currently_looking">Uruchomione poszukiwania</string>
 </resources>

@@ -1,11 +1,9 @@
 package com.example.clothessearchapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.annotation.SuppressLint;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
@@ -16,11 +14,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.clothessearchapp.R;
 import com.example.clothessearchapp.adapters.OccasionRecyclerAdapter;
-import com.example.clothessearchapp.adapters.TypesRecyclerAdapter;
 import com.example.clothessearchapp.network.GetDataService;
 import com.example.clothessearchapp.network.RetrofitClientInstance;
 import com.example.clothessearchapp.structure.Color;
@@ -69,53 +65,16 @@ public class SearchOccasionsActivity extends AppCompatActivity {
         token = loadToken();
         service = loadService();
 
-        types = new ArrayList<>();
-        colors = new ArrayList<>();
-        sizes = new ArrayList<>();
-        occasions = new ArrayList<>();
+        initializeDropdowns();
 
-        typeDropdown = findViewById(R.id.type_spinner);
-        colorDropdown = findViewById(R.id.color_spinner);
-        sizeDropdown = findViewById(R.id.size_spinner);
-        price = findViewById(R.id.price);
+
+        price = findViewById(R.id.clothes_price);
         submit = findViewById(R.id.submit_button);
         submit.setEnabled(false);
 
-        typesAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, types);
-        colorsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, colors);
-        sizesAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, sizes);
 
-        typeDropdown.setAdapter(typesAdapter);
-        colorDropdown.setAdapter(colorsAdapter);
-        sizeDropdown.setAdapter(sizesAdapter);
-
-        typeDropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getApplicationContext(), "sasf", Toast.LENGTH_LONG).show();
-                clearColorsAndSizes();
-                loadColors(types.get(position));
-                loadSizes();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-
-
-        price.setOnFocusChangeListener((v, hasFocus) -> {
-            if(!hasFocus){
-                Toast.makeText(getApplicationContext(), "test", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        occasionAdapter = new OccasionRecyclerAdapter(occasions);
         recyclerView = findViewById(R.id.recycler_occasions) ;
         recyclerView.setAdapter(occasionAdapter);
-//        recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
@@ -143,6 +102,41 @@ public class SearchOccasionsActivity extends AppCompatActivity {
                 } else {
                     submit.setEnabled(false);
                 }
+            }
+        });
+
+    }
+
+    private void initializeDropdowns() {
+        types = new ArrayList<>();
+        colors = new ArrayList<>();
+        sizes = new ArrayList<>();
+        occasions = new ArrayList<>();
+
+        typeDropdown = findViewById(R.id.type_spinner);
+        colorDropdown = findViewById(R.id.color_spinner);
+        sizeDropdown = findViewById(R.id.size_spinner);
+
+        typesAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, types);
+        colorsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, colors);
+        sizesAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, sizes);
+        occasionAdapter = new OccasionRecyclerAdapter(occasions);
+
+        typeDropdown.setAdapter(typesAdapter);
+        colorDropdown.setAdapter(colorsAdapter);
+        sizeDropdown.setAdapter(sizesAdapter);
+
+        typeDropdown.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                clearColorsAndSizes();
+                loadColors(types.get(position));
+                loadSizes();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
 
