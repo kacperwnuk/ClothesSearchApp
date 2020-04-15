@@ -67,4 +67,7 @@ public interface GetDataService {
     @HTTP(method = "DELETE", path = "/occasions", hasBody = true)
     Call<Occasion> deleteOccasion(@Header("Authorization") String auth, @Field("key") String key);
 
+    @GET("/email")
+    Call<String> sendEmail(@Header("Authorization") String auth);
+
 }

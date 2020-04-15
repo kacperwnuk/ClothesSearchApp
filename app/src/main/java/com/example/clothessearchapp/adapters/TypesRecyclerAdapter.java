@@ -15,12 +15,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class TypesRecyclerAdapter extends RecyclerView.Adapter<TypesRecyclerAdapter.MyViewHolder> {
 
     private List<Type> types;
-    private HashMap<String, Integer> bgImages = new HashMap<String, Integer>(){{
+    private static HashMap<String, Integer> bgImages = new HashMap<String, Integer>() {{
         put("T-SHIRT", R.drawable.tshirt);
         put("SHIRT", R.drawable.shirt);
         put("PANTS", R.drawable.pants);
@@ -29,6 +30,7 @@ public class TypesRecyclerAdapter extends RecyclerView.Adapter<TypesRecyclerAdap
         put("SHORTS", R.drawable.shorts);
 
     }};
+
 
     public TypesRecyclerAdapter(List<Type> types) {
         this.types = types;
@@ -49,19 +51,19 @@ public class TypesRecyclerAdapter extends RecyclerView.Adapter<TypesRecyclerAdap
     }
 
 
-
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.type_card_view_item, parent,  false);
+        View view = inflater.inflate(R.layout.type_card_view_item, parent, false);
         return new MyViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         String typeName = types.get(position).getName();
-        holder.clothesType.setText(typeName);
+        holder.clothesType.setText(Type.polishNames.getOrDefault(typeName, "Ubrania"));
+        holder.clothesType.setTag(typeName);
         holder.constraintLayout.setElevation(40.0f);
         holder.backgroundImage.setImageResource(bgImages.getOrDefault(typeName, R.drawable.tshirt));
     }

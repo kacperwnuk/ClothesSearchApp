@@ -11,7 +11,9 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.clothessearchapp.R;
 import com.example.clothessearchapp.adapters.ClothesRecyclerAdapter;
@@ -22,6 +24,7 @@ import com.example.clothessearchapp.structure.Clothes;
 import com.example.clothessearchapp.structure.DetailClothesRequest;
 import com.example.clothessearchapp.structure.DetailedClothes;
 import com.example.clothessearchapp.structure.OldClothes;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -39,6 +42,8 @@ public class FavouritesActivity extends AppCompatActivity {
     private String token;
 
     private ClothesRecyclerAdapter adapter;
+
+    private GetDataService service = RetrofitClientInstance.getRetrofitInstance(false).create(GetDataService.class);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,16 +92,14 @@ public class FavouritesActivity extends AppCompatActivity {
         return sharedPreferences.getString(getString(R.string.token), "");
     }
 
-//AKTUALIZACJA LISTY!!!!
-//    public void showDetail(View view){
-//        Intent intent = new Intent(this, ClothesDetailActivity.class);
-//        OldClothes chosenClothes = clothes.stream().filter(c -> c.getId() == view.getId()).findFirst().orElse(null);
-//        if(chosenClothes != null){
-//            intent.putExtra("chosenClothes", chosenClothes);
-//            startActivity(intent);
-//        }
-//    }
-//
+    public void showDetail(View view){
+        Intent intent = new Intent(this, ClothesDetailActivity.class);
+        DetailClothesRequest detailClothesRequest = (DetailClothesRequest) view.getTag();
+        intent.putExtra("request", detailClothesRequest);
+        System.out.println(view.getTag());
+        startActivity(intent);
+    }
+
     public void deleteClothes(View view){
         DetailClothesRequest detailClothesRequest = (DetailClothesRequest) view.getTag();
         System.out.println(detailClothesRequest.getKey());
@@ -111,7 +114,6 @@ public class FavouritesActivity extends AppCompatActivity {
     }
 
     private void deleteFavourite(DetailClothesRequest detailClothesRequest) {
-        GetDataService service = RetrofitClientInstance.getRetrofitInstance(false).create(GetDataService.class);
 
         Call<Clothes> callFavourite = service.deleteFavourite("Token " + token, detailClothesRequest.getKey());
 
@@ -134,4 +136,46 @@ public class FavouritesActivity extends AppCompatActivity {
         menuInflater.inflate(R.menu.favourites_menu, menu);
         return true;
     }
+
+    public boolean deleteFavourites(MenuItem item){
+
+        clothes.clear();
+        adapter.notifyDataSetChanged();
+
+        Call<Clothes> callFavourite = service.deleteFavourite("Token " + token, "all");
+        callFavourite.enqueue(new Callback<Clothes>() {
+            @Override
+            public void onResponse(Call<Clothes> call, Response<Clothes> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<Clothes> call, Throwable t) {
+                System.out.println(t.getMessage());
+            }
+        });
+
+        return true;
+    }
+
+    public boolean sendEmail(MenuItem item){
+
+//        Toast.makeText(this, "Wysłano ulubione na maila.", Toast.LENGTH_SHORT).show();
+        Snackbar.make(findViewById(R.id.constraint_layout), "Wysłano ulubione na maila", Snackbar.LENGTH_LONG).show();
+        Call<String> callMail = service.sendEmail("Token " + token);
+
+        callMail.enqueue(new Callback<String>() {
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                System.out.println(t.getMessage());
+            }
+        });
+        return true;
+    }
+
 }

@@ -75,7 +75,7 @@ public class ChooseTypeActivity extends AppCompatActivity {
 
     public void goToFilter(View view){
         Intent intent = new Intent(this, FiltersActivity.class);
-        intent.putExtra("clothesType", ((TextView)view.findViewById(R.id.type_name)).getText());
+        intent.putExtra("clothesType", (String)(view.findViewById(R.id.type_name)).getTag());
         startActivity(intent);
     }
 

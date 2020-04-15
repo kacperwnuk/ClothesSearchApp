@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_new_version);
 //
 //        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("Data", 0);
 //        String token = sharedPreferences.getString("Token", "");
@@ -44,11 +44,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void changeToFavouritesView(View view){
         Intent intent = new Intent(this, FavouritesActivity.class);
-        startActivity(intent);
-    }
-
-    public void changeToFiltersView(View view){
-        Intent intent = new Intent(this, SignInActivity.class);
         startActivity(intent);
     }
 

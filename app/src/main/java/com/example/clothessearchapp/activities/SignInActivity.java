@@ -42,8 +42,8 @@ public class SignInActivity extends AppCompatActivity {
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
         // Add Fragments to adapter one by one
-        adapter.addFragment(new SignUpFragment(), "Join Now");
-        adapter.addFragment(new SignInFragment(), "Sign In");
+        adapter.addFragment(new SignUpFragment(), "Rejestracja");
+        adapter.addFragment(new SignInFragment(), "Logowanie");
         viewPager.setAdapter(adapter);
 
         tabLayout = findViewById(R.id.tablayout);

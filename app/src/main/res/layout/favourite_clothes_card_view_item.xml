@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="64dp"
     android:layout_marginTop="2dp"
-    android:background="#8DC5C5CA">
+    android:background="#8DC5C5CA"
+    android:onClick="showDetail">
 
     <ImageView
         android:id="@+id/logo"

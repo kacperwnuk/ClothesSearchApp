@@ -63,6 +63,7 @@ public class OccasionRecyclerAdapter extends RecyclerView.Adapter<OccasionRecycl
         holder.colorText.setText(occasion.getColor());
         holder.priceText.setText(occasion.getPrice());
         holder.deleteButton.setTag(occasion.getKey());
+        holder.constraintLayout.setTag(occasion.getKey());
     }
 
     @Override
