@@ -1,4 +1,4 @@
-package com.example.clothessearchapp.structure;
+package com.example.clothessearchapp.notification;
 
 import java.util.concurrent.atomic.AtomicInteger;
 

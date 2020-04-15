@@ -1,18 +1,16 @@
 package com.example.clothessearchapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
+import android.app.job.JobInfo;
+import android.app.job.JobScheduler;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -21,25 +19,25 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.clothessearchapp.R;
 import com.example.clothessearchapp.SortingType;
 import com.example.clothessearchapp.adapters.OccasionRecyclerAdapter;
 import com.example.clothessearchapp.network.GetDataService;
 import com.example.clothessearchapp.network.RetrofitClientInstance;
+import com.example.clothessearchapp.service.OccasionJobService;
 import com.example.clothessearchapp.structure.Color;
-import com.example.clothessearchapp.structure.NotificationID;
+
 import com.example.clothessearchapp.structure.Occasion;
 import com.example.clothessearchapp.structure.Size;
 import com.example.clothessearchapp.structure.Type;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 import retrofit2.Call;
@@ -79,7 +77,6 @@ public class SearchOccasionsActivity extends AppCompatActivity {
         service = loadService();
 
         initializeDropdowns();
-        notification();
 
         price = findViewById(R.id.clothes_price);
         submit = findViewById(R.id.submit_button);
@@ -120,42 +117,7 @@ public class SearchOccasionsActivity extends AppCompatActivity {
 
     }
 
-    private void notification() {
-        String CHANNEL_ID = "1";
-        // Create the NotificationChannel, but only on API 26+ because
-        // the NotificationChannel class is new and not in the support library
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name = "Channel name";
-            String description = "Channel description";
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
-            channel.setDescription(description);
-            // Register the channel with the system; you can't change the importance
-            // or other notification behaviors after this
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            notificationManager.createNotificationChannel(channel);
-        }
 
-
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setSmallIcon(R.drawable.cloth)
-                .setContentTitle("Znaleziono ciuchy spełniające Twoje kryteria!")
-                .setContentText("Kryteria: T-shirty S Biały 45.00")
-                .setGroup("Occasions")
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                .setAutoCancel(true)
-                .setContentIntent(PendingIntent.getActivity(this, 0, new Intent(), 0));
-
-
-        Intent notificationIntent = new Intent(this, SearchOccasionsActivity.class);
-        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent,
-                PendingIntent.FLAG_UPDATE_CURRENT);
-        builder.setContentIntent(contentIntent);
-
-        // Add as notification
-        NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        manager.notify(NotificationID.getID(), builder.build());
-    }
 
     private void initializeDropdowns() {
         types = new ArrayList<>();
@@ -204,7 +166,6 @@ public class SearchOccasionsActivity extends AppCompatActivity {
                     }
 
                     occasions.clear();
-
                     occasions.addAll(response.body());
                     occasionAdapter.notifyDataSetChanged();
                 }
@@ -231,7 +192,7 @@ public class SearchOccasionsActivity extends AppCompatActivity {
 
     private String loadToken() {
         SharedPreferences sharedPreferences = getSharedPreferences("Data", 0);
-        return token = sharedPreferences.getString(getString(R.string.token), "");
+        return sharedPreferences.getString(getString(R.string.token), "");
     }
 
     private void loadSizes() {
@@ -298,11 +259,30 @@ public class SearchOccasionsActivity extends AppCompatActivity {
         Occasion occasion = new Occasion(UUID.randomUUID().toString(), type, color, size, price);
 
         occasions.add(occasion);
+        runService(occasion);
         occasionAdapter.notifyDataSetChanged();
         addOccasionOnServer(occasion);
 
-//        Toast.makeText(this, "Dodano nowe poszukiwanie!", Toast.LENGTH_SHORT).show();
         Snackbar.make(findViewById(R.id.constraint_layout), "Dodano nowe poszukiwanie!", Snackbar.LENGTH_LONG).show();
+    }
+
+    private void runService(Occasion occasion) {
+
+        JobScheduler jobScheduler = (JobScheduler) getApplicationContext().getSystemService(JOB_SCHEDULER_SERVICE);
+        ComponentName componentName = new ComponentName(this, OccasionJobService.class);
+
+        Gson gson = new Gson();
+        String json = gson.toJson(occasion);
+        PersistableBundle pb = new PersistableBundle();
+        pb.putString("occasion", json);
+
+        JobInfo jobInfo = new JobInfo.Builder(1, componentName)
+                .setRequiresBatteryNotLow(true)
+                .setExtras(pb)
+//                .setPeriodic(JobInfo.getMinPeriodMillis(), JobInfo.getMinFlexMillis())
+                .setMinimumLatency(100)
+                .build();
+        jobScheduler.schedule(jobInfo);
     }
 
     private void addOccasionOnServer(Occasion occasion) {
@@ -328,7 +308,6 @@ public class SearchOccasionsActivity extends AppCompatActivity {
             occasions.remove(value);
             occasionAdapter.notifyDataSetChanged();
             deleteOccasionOnServer(value);
-//            deleteOccasionOnServer(value);
         });
 
     }

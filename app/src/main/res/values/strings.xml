@@ -56,4 +56,5 @@
     <string name="delete_all">Usuń wszystkie</string>
     <string name="add_scheduler">Rozpocznij poszukiwanie</string>
     <string name="currently_looking">Uruchomione poszukiwania</string>
+    <string name="occasion_found">Znaleziono ciuchy spełniające Twoje kryteria!</string>
 </resources>

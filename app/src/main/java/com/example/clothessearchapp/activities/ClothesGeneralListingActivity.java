@@ -135,14 +135,7 @@ public class ClothesGeneralListingActivity extends AppCompatActivity {
                 RecyclerView recycler = findViewById(R.id.clothes_recycler_view);
                 recycler.setAdapter(adapter);
 
-                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ClothesGeneralListingActivity.this) {
-                    @Override
-                    public boolean canScrollVertically() {
-                        return false;
-                    }
-                };
-                recycler.setLayoutManager(linearLayoutManager);
-//                recycler.setNestedScrollingEnabled(false);
+                recycler.setLayoutManager( new LinearLayoutManager(ClothesGeneralListingActivity.this));
 //                recycler.setLayoutManager(new GridLayoutManager(ClothesGeneralListingActivity.this, 1));
             }
 
