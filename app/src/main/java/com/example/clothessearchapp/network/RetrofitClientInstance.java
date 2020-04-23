@@ -1,7 +1,5 @@
 package com.example.clothessearchapp.network;
 
-import android.content.SharedPreferences;
-
 import com.example.clothessearchapp.structure.Clothes;
 import com.example.clothessearchapp.structure.DetailedClothes;
 import com.google.gson.Gson;

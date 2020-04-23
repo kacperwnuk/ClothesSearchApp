@@ -18,6 +18,7 @@ import com.example.clothessearchapp.network.GetDataService;
 import com.example.clothessearchapp.network.RetrofitClientInstance;
 import com.example.clothessearchapp.structure.Type;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -28,20 +29,23 @@ public class ChooseTypeActivity extends AppCompatActivity {
 
     private List<Type> types;
     private TypesRecyclerAdapter adapter;
-    private MyRecyclerAdapter recyclerAdapter;
     private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_type);
+        types =  new ArrayList<>();
 
         progressDialog = new ProgressDialog(ChooseTypeActivity.this);
         progressDialog.setMessage("Loading..");
         progressDialog.show();
 
         showTypes();
-
+        adapter = new TypesRecyclerAdapter(types);
+        RecyclerView recycler = findViewById(R.id.recycler_view);
+        recycler.setAdapter(adapter);
+        recycler.setLayoutManager(new GridLayoutManager(ChooseTypeActivity.this, 2));
     }
 
 
@@ -56,13 +60,10 @@ public class ChooseTypeActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Type>> call, Response<List<Type>> response) {
                 progressDialog.dismiss();
-                types = response.body();
-//                List<String> stringTypes = types.stream().map(Type::getName).collect(Collectors.toList());
-                adapter = new TypesRecyclerAdapter(types);
-//                recyclerAdapter = new MyRecyclerAdapter(stringTypes);
-                RecyclerView recycler = findViewById(R.id.recycler_view);
-                recycler.setAdapter(adapter);
-                recycler.setLayoutManager(new GridLayoutManager(ChooseTypeActivity.this, 2));
+                types.clear();
+                types.addAll(response.body());
+                adapter.notifyDataSetChanged();
+
             }
 
             @Override

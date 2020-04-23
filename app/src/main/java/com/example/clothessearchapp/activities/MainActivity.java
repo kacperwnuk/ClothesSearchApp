@@ -16,24 +16,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_new_version);
-//
-//        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences("Data", 0);
-//        String token = sharedPreferences.getString("Token", "");
-//        Toast.makeText(getApplicationContext(), token, Toast.LENGTH_SHORT).show();
-// Request example
-//        GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
-////        Call<List<Clothes>> call = service.getClothes("T-SHIRT", "","","","","");
-////        call.enqueue(new Callback<List<Clothes>>() {
-////            @Override
-////            public void onResponse(Call<List<Clothes>> call, Response<List<Clothes>> response) {
-////                System.out.println(response.body());
-////            }
-////
-////            @Override
-////            public void onFailure(Call<List<Clothes>> call, Throwable t) {
-////                System.out.println(t.getMessage());
-////            }
-////        });
+
     }
 
 

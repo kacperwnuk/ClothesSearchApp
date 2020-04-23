@@ -141,47 +141,5 @@ public class Clothes {
         return result.toString();
     }
 
-//    @Override
-//    public int describeContents() {
-//        return 0;
-//    }
-//
-//    @Override
-//    public void writeToParcel(Parcel dest, int flags) {
-//        dest.writeValue(this.id);
-//        dest.writeString(this.key);
-//        dest.writeString(this.type.getName());
-//        dest.writeString(this.name);
-//        dest.writeValue(this.price);
-//        dest.writeSerializable(this.imageLink);
-//        dest.writeList(this.colors);
-//        dest.writeList(this.sizes);
-//        dest.writeValue(this.favourite);
-//    }
-//
-//    protected Clothes(Parcel in) {
-//        this.id = (Integer) in.readValue(Integer.class.getClassLoader());
-//        this.key = in.readString();
-//        this.type = Type(in.readString());
-//        this.name = in.readString();
-//        this.price = (Integer) in.readValue(Integer.class.getClassLoader());
-//        this.imageLink = (URL) in.readSerializable();
-//        this.colors = new ArrayList<Color>();
-//        in.readList(this.colors, Color.class.getClassLoader());
-//        this.sizes = new ArrayList<Size>();
-//        in.readList(this.sizes, Size.class.getClassLoader());
-//        this.favourite = (Boolean) in.readValue(Boolean.class.getClassLoader());
-//    }
-//
-//    public static final Creator<Clothes> CREATOR = new Creator<Clothes>() {
-//        @Override
-//        public Clothes createFromParcel(Parcel source) {
-//            return new Clothes(source);
-//        }
-//
-//        @Override
-//        public Clothes[] newArray(int size) {
-//            return new Clothes[size];
-//        }
-//    };
+
 }

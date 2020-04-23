@@ -33,9 +33,6 @@ public class FiltersActivity extends AppCompatActivity implements AdapterView.On
 
     private String typeName;
 
-//    private List<Color> colors;
-//    private List<Size> sizes;
-
     private List<String> colors;
     private List<String> sizes;
 
@@ -52,7 +49,6 @@ public class FiltersActivity extends AppCompatActivity implements AdapterView.On
     private CheckBox ascendingCheckbox;
     private CheckBox descendingCheckbox;
     private Button submit;
-    private ProgressDialog progressDialog;
 
 
     @Override
@@ -163,14 +159,12 @@ public class FiltersActivity extends AppCompatActivity implements AdapterView.On
             if (!colourChecked) {
                 colourChecked = true;
             } else {
-//                Toast.makeText(view.getContext(), parent.getItemAtPosition(position).toString(), Toast.LENGTH_LONG).show();
                 colourDropdown.setSelection(position);
             }
         } else {
             if (!sizeChecked) {
                 sizeChecked = true;
             } else {
-//                Toast.makeText(view.getContext(), parent.getItemAtPosition(position).toString(), Toast.LENGTH_LONG).show();
                 sizeDropdown.setSelection(position);
             }
         }
@@ -183,21 +177,9 @@ public class FiltersActivity extends AppCompatActivity implements AdapterView.On
     }
 
     public void submitForm(View view) {
-//        String text = lowerPrice.getText() + " " + higherPrice.getText() + " " + colourDropdown.getSelectedItem().toString() + " " + sizeDropdown.getSelectedItem().toString();
-//        Toast.makeText(view.getContext(), text, Toast.LENGTH_LONG).show();
         Intent intent = new Intent(this, ClothesGeneralListingActivity.class);
         intent.putExtra("lowerPrice", lowerPrice.getText().toString());
-//        if (lowerPrice.getText().toString().equals("")){
-//            intent.putExtra("lowerPrice", 0);
-//        } else {
-//            intent.putExtra("lowerPrice", Integer.valueOf(lowerPrice.getText().toString()));
-//        }
         intent.putExtra("higherPrice", higherPrice.getText().toString());
-//        if (higherPrice.getText().toString().equals("")) {
-//            intent.putExtra("higherPrice", 1000);
-//        } else {
-//            intent.putExtra("higherPrice", Integer.valueOf(higherPrice.getText().toString()));
-//        }
         intent.putExtra("color", colourDropdown.getSelectedItem().toString());
         intent.putExtra("size", sizeDropdown.getSelectedItem().toString());
         intent.putExtra("type", typeName);

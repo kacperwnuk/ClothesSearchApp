@@ -3,7 +3,6 @@ package com.example.clothessearchapp.adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -13,9 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.clothessearchapp.R;
 import com.example.clothessearchapp.structure.Occasion;
-import com.example.clothessearchapp.structure.OldClothes;
-
-import org.w3c.dom.Text;
 
 import java.util.List;
 

@@ -80,11 +80,9 @@ public class ClothesRecyclerAdapter extends RecyclerView.Adapter<ClothesRecycler
         TextView clothesName;
         TextView clothesPrice;
         ImageButton deleteButton;
-//        TextView testViewTitle;
 
         MyViewHolder(View view) {
             super(view);
-//            this.testViewTitle = view.findViewById(R.id.title);
             this.constraintLayout = (ConstraintLayout) view;
             this.logo = view.findViewById(R.id.logo);
             this.clothesName = view.findViewById(R.id.product_name);
@@ -113,25 +111,7 @@ public class ClothesRecyclerAdapter extends RecyclerView.Adapter<ClothesRecycler
             holder.deleteButton.setTag(detailClothesRequest);
         }
 
-//        if (chosenClothes.isFavourite()){
-//            holder.favouriteStar.setImageResource(android.R.drawable.btn_star_big_on);
-//        } else {
-//            holder.favouriteStar.setImageResource(android.R.drawable.btn_star_big_off);
-//        }
-//
-//        holder.favouriteStar.setOnClickListener(v -> {
-//            Toast.makeText(v.getContext(), chosenClothes.getName(), Toast.LENGTH_SHORT).show();
-//
-//            if(chosenClothes.isFavourite()){
-//                holder.favouriteStar.setImageResource(android.R.drawable.btn_star_big_off);
-//                chosenClothes.setFavourite(false);
-//            } else {
-//                holder.favouriteStar.setImageResource(android.R.drawable.btn_star_big_on);
-//                chosenClothes.setFavourite(true);
-//            }
-//        });
         holder.constraintLayout.setElevation(40.0f);
-//        holder.constraintLayout.setOnClickListener(view -> Toast.makeText(view.getContext(), clothes.get(position).getName(), Toast.LENGTH_LONG).show());
 
     }
 

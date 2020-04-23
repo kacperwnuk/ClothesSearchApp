@@ -2,7 +2,6 @@ package com.example.clothessearchapp.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
@@ -13,21 +12,15 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.clothessearchapp.R;
 import com.example.clothessearchapp.adapters.ClothesRecyclerAdapter;
-import com.example.clothessearchapp.adapters.FavouriteClothesRecyclerAdapter;
 import com.example.clothessearchapp.network.GetDataService;
 import com.example.clothessearchapp.network.RetrofitClientInstance;
 import com.example.clothessearchapp.structure.Clothes;
 import com.example.clothessearchapp.structure.DetailClothesRequest;
-import com.example.clothessearchapp.structure.DetailedClothes;
-import com.example.clothessearchapp.structure.OldClothes;
 import com.google.android.material.snackbar.Snackbar;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -57,7 +50,6 @@ public class FavouritesActivity extends AppCompatActivity {
         progressDialog.show();
 
         getFavouriteClothes();
-
 
     }
 
@@ -160,7 +152,6 @@ public class FavouritesActivity extends AppCompatActivity {
 
     public boolean sendEmail(MenuItem item){
 
-//        Toast.makeText(this, "Wysłano ulubione na maila.", Toast.LENGTH_SHORT).show();
         Snackbar.make(findViewById(R.id.constraint_layout), "Wysłano ulubione na maila", Snackbar.LENGTH_LONG).show();
         Call<String> callMail = service.sendEmail("Token " + token);
 

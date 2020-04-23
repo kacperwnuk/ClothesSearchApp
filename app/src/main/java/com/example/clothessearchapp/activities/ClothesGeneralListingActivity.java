@@ -45,7 +45,6 @@ public class ClothesGeneralListingActivity extends AppCompatActivity {
         private String higherPrice;
         private SortingType sortingType;
 
-        //        private Boolean ascending;
         ClothesFilter(String type, String color, String size, String lowerPrice, String higherPrice, SortingType sortingType) {
             this.type = type;
             this.color = color;
@@ -65,28 +64,6 @@ public class ClothesGeneralListingActivity extends AppCompatActivity {
 
         }
 
-//        List<OldClothes> getFilteredClothes(List<OldClothes> clothes) {
-//            List<OldClothes> filteredClothes = clothes;
-//
-//            if (!color.equals("")) {
-//                filteredClothes = filteredClothes.stream().filter(c -> c.getColor().equals(color)).collect(Collectors.toList());
-//            }
-//
-//            if (!size.equals("")){
-//                filteredClothes = filteredClothes.stream().filter(c -> c.getSize().equals(size)).collect(Collectors.toList());
-//            }
-//
-//            filteredClothes = filteredClothes.stream().filter(c -> c.getPrice() >= lowerPrice && c.getPrice() <= higherPrice).collect(Collectors.toList());
-//
-//            switch (sortingType){
-//                case ASCENDING:
-//                    filteredClothes.sort(Comparator.comparing(OldClothes::getPrice));
-//                case DESCENDING:
-//                    filteredClothes.sort(Comparator.comparing(OldClothes::getPrice).reversed());
-//            }
-//
-//            return filteredClothes;
-//        }
     }
 
 
@@ -97,10 +74,6 @@ public class ClothesGeneralListingActivity extends AppCompatActivity {
         Intent intent = getIntent();
         ClothesFilter clothesFilter = new ClothesFilter(intent);
 
-//        Toast.makeText(this, lowerPrice + Integer.toString(higherPrice) + color + size, Toast.LENGTH_LONG).show();
-
-//        ClothesFilter clothesFilter = new ClothesFilter(color, size, lowerPrice, higherPrice, sortingType);
-//        List<OldClothes> filteredClothes = clothesFilter.getFilteredClothes(clothes);
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Looking for clothes...");
         progressDialog.show();
@@ -136,7 +109,6 @@ public class ClothesGeneralListingActivity extends AppCompatActivity {
                 recycler.setAdapter(adapter);
 
                 recycler.setLayoutManager( new LinearLayoutManager(ClothesGeneralListingActivity.this));
-//                recycler.setLayoutManager(new GridLayoutManager(ClothesGeneralListingActivity.this, 1));
             }
 
             @Override

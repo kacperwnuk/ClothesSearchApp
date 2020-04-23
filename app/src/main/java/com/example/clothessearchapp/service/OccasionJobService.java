@@ -5,12 +5,9 @@ import android.app.job.JobService;
 import android.content.SharedPreferences;
 
 import androidx.core.app.NotificationCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.clothessearchapp.R;
-import com.example.clothessearchapp.activities.ClothesGeneralListingActivity;
-import com.example.clothessearchapp.adapters.ClothesRecyclerAdapter;
+
 import com.example.clothessearchapp.network.GetDataService;
 import com.example.clothessearchapp.network.RetrofitClientInstance;
 import com.example.clothessearchapp.notification.NotificationID;
@@ -28,7 +25,6 @@ import retrofit2.Response;
 
 public class OccasionJobService extends JobService {
 
-    private static int counter = 0;
     private String token;
 
     @Override
