@@ -24,6 +24,7 @@ import com.example.clothessearchapp.network.RetrofitClientInstance;
 import com.example.clothessearchapp.structure.Clothes;
 import com.example.clothessearchapp.structure.DetailClothesRequest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -79,7 +80,12 @@ public class ClothesGeneralListingActivity extends AppCompatActivity {
         progressDialog.show();
         getFilteredClothes(clothesFilter);
 
+        clothes = new ArrayList<>();
+        adapter = new ClothesRecyclerAdapter(clothes, R.layout.general_clothes_card_view_item);
+        RecyclerView recycler = findViewById(R.id.clothes_recycler_view);
+        recycler.setAdapter(adapter);
 
+        recycler.setLayoutManager( new LinearLayoutManager(ClothesGeneralListingActivity.this));
     }
 
     public void showDetail(View view){
@@ -102,13 +108,10 @@ public class ClothesGeneralListingActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Clothes>> call, Response<List<Clothes>> response) {
                 progressDialog.dismiss();
-                clothes = response.body();
+                clothes.clear();
+                clothes.addAll(response.body());
+                adapter.notifyDataSetChanged();
 
-                adapter = new ClothesRecyclerAdapter(clothes, R.layout.general_clothes_card_view_item);
-                RecyclerView recycler = findViewById(R.id.clothes_recycler_view);
-                recycler.setAdapter(adapter);
-
-                recycler.setLayoutManager( new LinearLayoutManager(ClothesGeneralListingActivity.this));
             }
 
             @Override
