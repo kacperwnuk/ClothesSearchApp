@@ -3,10 +3,12 @@ package com.example.clothessearchapp.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -22,6 +24,7 @@ import com.example.clothessearchapp.network.RetrofitClientInstance;
 import com.example.clothessearchapp.structure.Clothes;
 import com.example.clothessearchapp.structure.DetailClothesRequest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -43,7 +46,6 @@ public class ClothesGeneralListingActivity extends AppCompatActivity {
         private String higherPrice;
         private SortingType sortingType;
 
-        //        private Boolean ascending;
         ClothesFilter(String type, String color, String size, String lowerPrice, String higherPrice, SortingType sortingType) {
             this.type = type;
             this.color = color;
@@ -63,28 +65,6 @@ public class ClothesGeneralListingActivity extends AppCompatActivity {
 
         }
 
-//        List<OldClothes> getFilteredClothes(List<OldClothes> clothes) {
-//            List<OldClothes> filteredClothes = clothes;
-//
-//            if (!color.equals("")) {
-//                filteredClothes = filteredClothes.stream().filter(c -> c.getColor().equals(color)).collect(Collectors.toList());
-//            }
-//
-//            if (!size.equals("")){
-//                filteredClothes = filteredClothes.stream().filter(c -> c.getSize().equals(size)).collect(Collectors.toList());
-//            }
-//
-//            filteredClothes = filteredClothes.stream().filter(c -> c.getPrice() >= lowerPrice && c.getPrice() <= higherPrice).collect(Collectors.toList());
-//
-//            switch (sortingType){
-//                case ASCENDING:
-//                    filteredClothes.sort(Comparator.comparing(OldClothes::getPrice));
-//                case DESCENDING:
-//                    filteredClothes.sort(Comparator.comparing(OldClothes::getPrice).reversed());
-//            }
-//
-//            return filteredClothes;
-//        }
     }
 
 
@@ -95,16 +75,17 @@ public class ClothesGeneralListingActivity extends AppCompatActivity {
         Intent intent = getIntent();
         ClothesFilter clothesFilter = new ClothesFilter(intent);
 
-//        Toast.makeText(this, lowerPrice + Integer.toString(higherPrice) + color + size, Toast.LENGTH_LONG).show();
-
-//        ClothesFilter clothesFilter = new ClothesFilter(color, size, lowerPrice, higherPrice, sortingType);
-//        List<OldClothes> filteredClothes = clothesFilter.getFilteredClothes(clothes);
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Looking for clothes...");
         progressDialog.show();
         getFilteredClothes(clothesFilter);
 
+        clothes = new ArrayList<>();
+        adapter = new ClothesRecyclerAdapter(clothes, R.layout.general_clothes_card_view_item);
+        RecyclerView recycler = findViewById(R.id.clothes_recycler_view);
+        recycler.setAdapter(adapter);
 
+        recycler.setLayoutManager( new LinearLayoutManager(ClothesGeneralListingActivity.this));
     }
 
     public void showDetail(View view){
@@ -118,17 +99,19 @@ public class ClothesGeneralListingActivity extends AppCompatActivity {
     private void getFilteredClothes(ClothesFilter clothesFilter) {
         GetDataService service = RetrofitClientInstance.getRetrofitInstance(false).create(GetDataService.class);
 
-        Call<List<Clothes>> call = service.getClothes(clothesFilter.type, clothesFilter.color, clothesFilter.size, clothesFilter.lowerPrice, clothesFilter.higherPrice, clothesFilter.sortingType.name().toLowerCase());
+        SharedPreferences sharedPreferences = getSharedPreferences("Data", 0);
+        String token = sharedPreferences.getString(getString(R.string.token), "");
+
+
+        Call<List<Clothes>> call = service.getClothes("Token " + token, clothesFilter.type, clothesFilter.color, clothesFilter.size, clothesFilter.lowerPrice, clothesFilter.higherPrice, clothesFilter.sortingType.name().toLowerCase());
         call.enqueue(new Callback<List<Clothes>>() {
             @Override
             public void onResponse(Call<List<Clothes>> call, Response<List<Clothes>> response) {
                 progressDialog.dismiss();
-                clothes = response.body();
+                clothes.clear();
+                clothes.addAll(response.body());
+                adapter.notifyDataSetChanged();
 
-                adapter = new ClothesRecyclerAdapter(clothes);
-                RecyclerView recycler = findViewById(R.id.clothes_recycler_view);
-                recycler.setAdapter(adapter);
-                recycler.setLayoutManager(new GridLayoutManager(ClothesGeneralListingActivity.this, 1));
             }
 
             @Override

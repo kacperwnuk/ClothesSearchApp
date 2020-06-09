@@ -22,31 +22,39 @@
         </activity>
         <activity
             android:name=".activities.ChooseTypeActivity"
-            android:parentActivityName=".activities.MainActivity" />
+            android:parentActivityName=".activities.MainActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.ClothesDetailActivity"
-            android:parentActivityName=".activities.FavouritesActivity" />
+            android:parentActivityName=".activities.FavouritesActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.SearchOccasionsActivity"
-            android:parentActivityName=".activities.MainActivity" />
+            android:parentActivityName=".activities.MainActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.ClothesGeneralListingActivity"
-            android:parentActivityName=".activities.ChooseTypeActivity" />
+            android:parentActivityName=".activities.ChooseTypeActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.FiltersActivity"
-            android:parentActivityName=".activities.ChooseTypeActivity" />
+            android:parentActivityName=".activities.ChooseTypeActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.FavouritesActivity"
-            android:parentActivityName=".activities.MainActivity" />
-        <activity
-            android:name=".activities.SearchTypeActivity"
-            android:parentActivityName=".activities.MainActivity" />
-        <activity android:name=".activities.MainActivity"/>
+            android:parentActivityName=".activities.MainActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".activities.MainActivity"
+            android:screenOrientation="portrait"/>
 
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+        <service
+            android:name=".service.OccasionJobService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
     </application>
 
 </manifest>

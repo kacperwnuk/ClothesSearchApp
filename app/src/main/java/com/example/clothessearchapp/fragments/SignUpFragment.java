@@ -20,6 +20,7 @@ import com.example.clothessearchapp.materialux.cairoTextView;
 import com.example.clothessearchapp.network.GetDataService;
 import com.example.clothessearchapp.network.RetrofitClientInstance;
 import com.example.clothessearchapp.structure.UserCredentials;
+import com.google.android.material.snackbar.Snackbar;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -173,7 +174,7 @@ public class SignUpFragment extends Fragment implements View.OnClickListener {
                 int code = response.code();
                 if (code == 201) {
                     System.out.println(code);
-                    Toast.makeText(getContext(),"Success, go to login page!" ,Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(),"Zarejestrowano, przejdź do logowania!" ,Toast.LENGTH_LONG).show();
                 } else {
 //                    errorText.setText(getString(R.string.login_error));
                     _loginEditText.setError(getString(R.string.username_exists));

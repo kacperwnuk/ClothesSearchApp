@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.FiltersActivity">
+    tools:context=".activities.FiltersActivity"
+    >
 
     <Spinner
         android:id="@+id/color_spinner"
@@ -20,7 +21,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/color_spinner_title"
-        app:layout_constraintTop_toTopOf="@+id/color_spinner_title" />
+        app:layout_constraintTop_toTopOf="@+id/color_spinner_title"
+        android:focusable="true"
+        android:focusableInTouchMode="true"/>
 
     <Spinner
         android:id="@+id/size_spinner"
